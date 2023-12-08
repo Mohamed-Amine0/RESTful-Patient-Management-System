@@ -106,3 +106,11 @@ Follow these steps to set up and run your Django project.
 ## Usage
 
 Navigate to `http://localhost:8000/PMS/patient/` to access the application.
+
+
+## Demo
+![Alt text](image.png)
+![Alt text](image-1.png)
+![Alt text](image-2.png)
+![Alt text](image-3.png)
+![Alt text](image-4.png)
