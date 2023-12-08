@@ -1,0 +1,40 @@
+<!-- templates/pms/appointment_list.html -->
+{% extends 'pms/base.html' %}
+
+{% block title %}Appointments List{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4 text-center">Appointments List</h1>
+    
+    <div class="text-center mb-4">
+        <a href="{% url 'appointment_create' %}" class="btn btn-primary btn-sm">Add Appointment</a>
+    </div>
+    
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Patient</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.patientId.name }}</td>
+                    <td>
+                        <a href="{% url 'appointment_detail' pk=appointment.pk %}">
+                        {{ appointment.date }}
+                        </a>
+                    </td>
+                    <td>{{ appointment.time }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'appointment_update' pk=appointment.pk %}" class="btn btn-primary btn-sm mr-2">Update</a>
+                        <a href="{% url 'appointment_delete' pk=appointment.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!-- templates/pms/appointment_create.html -->
+{% extends 'pms/base.html' %}
+
+{% block title %}Create Appointment{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 500px;">
+            <div class="card-body text-center">
+                <h1 class="mb-4">Create Appointment</h1>
+
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_patientId">Patient :</label>
+                        {{ form.patientId }}
+                        <div class="invalid-feedback">
+                            {{ form.patientId.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_date">Date:</label>
+                        {{ form.date }}
+                        <div class="invalid-feedback">
+                            {{ form.date.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_time">Time:</label>
+                        {{ form.time }}
+                        <div class="invalid-feedback">
+                            {{ form.time.errors }}
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-danger mr-2">Add</button>
+                        <a href="{% url 'appointment_list' %}" class="btn btn-secondary ml-2">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

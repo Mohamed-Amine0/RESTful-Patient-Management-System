@@ -1,0 +1,47 @@
+<!-- templates/pms/patient_detail.html -->
+{% extends 'pms/base.html' %}
+
+{% block title %}Patient Details{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 600px;">
+            <div class="card-body">
+                <h1 class="mb-4 text-center">Patient Details</h1>
+                <p class="mb-3"><strong>Name:</strong> {{ patient.name }}</p>
+                <p class="mb-3"><strong>CIN:</strong> {{ patient.cin }}</p>
+                <p class="mb-3"><strong>Sex:</strong> {{ patient.sex }}</p>
+                <p class="mb-3"><strong>Age:</strong> {{ patient.age }}</p>
+                
+                <!-- Update and Delete buttons for Patient -->
+                <div class="text-center mb-4">
+                    <a href="{% url 'patient_update' pk=patient.pk %}" class="btn btn-primary btn-sm mr-3">Update</a>
+                    <a href="{% url 'patient_delete' pk=patient.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+
+                <!-- List of Appointments -->
+                <h2 class="mt-4 mb-3 text-center">Appointments</h2>
+                {% if patient.appointment_set.all %}
+                    <ul class="list-group">
+                        {% for appointment in patient.appointment_set.all %}
+                            <li class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="mb-0"><strong>Date:</strong> {{ appointment.date }}</p>
+                                    <p class="mb-0"><strong>Time:</strong> {{ appointment.time }}</p>
+                                    <a href="{% url 'appointment_detail' pk=appointment.pk %}" class="btn btn-info btn-sm ml-3">Details</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-center">No appointments for this patient.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

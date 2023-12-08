@@ -1,0 +1,38 @@
+<!-- templates/pms/prescription_list.html -->
+{% extends 'pms/base.html' %}
+
+{% block title %}Prescriptions List{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4 text-center">Prescriptions List</h1>
+    
+    <div class="text-center mb-4">
+        <a href="{% url 'prescription_create' %}" class="btn btn-primary btn-sm">Add Prescription</a>
+    </div>
+    
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Patient</th>
+                <th scope="col">Appointment Date</th>
+                <th scope="col">Appointment Time</th>
+                <th scope="col">Description</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prescription in prescriptions %}
+                <tr>
+                    <td>{{ prescription.appointmentId.patientId.name }}</td>
+                    <td>{{ prescription.appointmentId.date }}</td>
+                    <td>{{ prescription.appointmentId.time }}</td>
+                    <td>{{ prescription.description }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'prescription_update' pk=prescription.pk %}" class="btn btn-primary btn-sm mr-2">Update</a>
+                        <a href="{% url 'prescription_delete' pk=prescription.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

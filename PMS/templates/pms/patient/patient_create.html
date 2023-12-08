@@ -1,0 +1,76 @@
+<!-- templates/pms/patient_create.html -->
+{% extends 'pms/base.html' %}
+
+{% block title %}Create Patient{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 500px;">
+            <div class="card-body text-center">
+                <h1 class="mb-4">Create Patient</h1>
+
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_cin">CIN:</label>
+                        {{ form.cin }}
+                        <div class="invalid-feedback">
+                            {{ form.cin.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_name">Name:</label>
+                        {{ form.name }}
+                        <div class="invalid-feedback">
+                            {{ form.name.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_sex">Sex:</label>
+                        {{ form.sex }}
+                        <div class="invalid-feedback">
+                            {{ form.sex.errors }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_age">Age:</label>
+                        {{ form.age }}
+                        <div class="invalid-feedback">
+                            {{ form.age.errors }}
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-danger mr-2">Add</button>
+                        <a href="{% url 'patient_list' %}" class="btn btn-secondary ml-2">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enable Bootstrap validation styles
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+{% endblock %}

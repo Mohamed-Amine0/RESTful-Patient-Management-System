@@ -1,0 +1,38 @@
+<!-- templates/pms/patient_list.html -->
+{% extends 'pms/base.html' %}
+
+{% block title %}Patients List{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4 text-center">Patients List</h1>
+    
+    <div class="text-center mb-4">
+        <a href="{% url 'patient_create' %}" class="btn btn-primary btn-sm">Add Patient</a>
+    </div>
+    
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">CIN</th>
+                <th scope="col">Name</th>
+                <th scope="col">Sex</th>
+                <th scope="col">Age</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.cin }}</td>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.sex }}</td>
+                    <td>{{ patient.age }}</td>
+                    <td class="text-center">
+                        <a href="{% url 'patient_update' pk=patient.pk %}" class="btn btn-primary btn-sm mr-2">Update</a>
+                        <a href="{% url 'patient_delete' pk=patient.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

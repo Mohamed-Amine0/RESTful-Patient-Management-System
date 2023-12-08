@@ -1,0 +1,27 @@
+<!-- templates/pms/prescription_detail.html -->
+{% extends 'pms/base.html' %}
+
+{% block title %}Prescription Details{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card mx-auto" style="max-width: 600px;">
+            <div class="card-body">
+                <h1 class="mb-4 text-center">Prescription Details</h1>
+                <p class="mb-3"><strong>Patient:</strong> {{ prescription.appointmentId.patientId.name }}</p>
+                <p class="mb-3"><strong>Appointment Date:</strong> {{ prescription.appointmentId.date }}</p>
+                <p class="mb-3"><strong>Appointment Time:</strong> {{ prescription.appointmentId.time }}</p>
+                <p class="mb-3"><strong>Description:</strong> {{ prescription.description }}</p>
+                <!-- Update and Delete buttons for Prescription -->
+                <div class="text-center mb-4">
+                    <a href="{% url 'prescription_update' pk=prescription.pk %}" class="btn btn-primary btn-sm mr-3">Update</a>
+                    <a href="{% url 'prescription_delete' pk=prescription.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
